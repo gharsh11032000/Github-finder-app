@@ -10,12 +10,17 @@ const github = axios.create({
 });
 
 export const searchUsers = async (text) => {
-  const params = new URLSearchParams({
-    q: text,
-  });
+  try {
+    const params = new URLSearchParams({
+      q: text,
+    });
 
-  const response = await github.get(`/search/users?${params}`);
-  return response.data.items;
+    const response = await github.get(`/search/users?${params}`);
+    return response.data.items;
+  } catch (error) {
+    window.location = "/notfound";
+    console.log(error);
+  }
 };
 
 export const getUserAndUserRepos = async (login) => {
@@ -28,5 +33,6 @@ export const getUserAndUserRepos = async (login) => {
     return { user: user.data, repos: repos.data };
   } catch (error) {
     window.location = "/notfound";
+    console.log(error);
   }
 };

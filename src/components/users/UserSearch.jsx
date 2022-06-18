@@ -13,19 +13,24 @@ function UserSearch() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (text === "") {
-      setAlert("Please Enter Something", "error");
-    } else {
-      dispatch({
-        type: "SET_LOADING",
-      });
-      const users = await searchUsers(text);
-      dispatch({
-        type: "GET_USERS",
-        payload: users,
-      });
-      setText("");
+    try {
+      e.preventDefault();
+      if (text === "") {
+        setAlert("Please Enter Something", "error");
+      } else {
+        dispatch({
+          type: "SET_LOADING",
+        });
+        const users = await searchUsers(text);
+        dispatch({
+          type: "GET_USERS",
+          payload: users,
+        });
+        setText("");
+      }
+    } catch (error) {
+      window.location = "/notfound";
+      console.log(error);
     }
   };
 

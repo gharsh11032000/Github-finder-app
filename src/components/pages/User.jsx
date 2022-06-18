@@ -16,11 +16,16 @@ function User() {
       type: "SET_LOADING",
     });
     const getUserData = async () => {
-      const userData = await getUserAndUserRepos(params.login);
-      dispatch({
-        type: "GET_USER_AND_USER_REPOS",
-        payload: userData,
-      });
+      try {
+        const userData = await getUserAndUserRepos(params.login);
+        dispatch({
+          type: "GET_USER_AND_USER_REPOS",
+          payload: userData,
+        });
+      } catch (error) {
+        window.location = "/notfound";
+        console.log(error);
+      }
     };
     getUserData();
   }, [dispatch, params.login]);
