@@ -1,12 +1,8 @@
 import axios from "axios";
-import { REACT_APP_GITHUB_TOKEN } from "../../../config";
 import { REACT_APP_GITHUB_URL } from "../../../config";
 
 const github = axios.create({
   baseURL: REACT_APP_GITHUB_URL,
-  headers: {
-    Authorization: `token ${REACT_APP_GITHUB_TOKEN}`,
-  },
 });
 
 export const searchUsers = async (text) => {
